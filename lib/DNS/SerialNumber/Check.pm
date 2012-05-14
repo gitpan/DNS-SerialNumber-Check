@@ -7,7 +7,7 @@ use Net::DNS;
 use Carp qw/croak/;
 
 use vars qw/$VERSION/;
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 sub new {
     my $class = shift;
@@ -84,11 +84,11 @@ sub info {
 
 =head1 NAME
 
-DNS::SerialNumber::Check - check the consistency of serial number from zone's nameservers
+DNS::SerialNumber::Check - check the consistency of a zone's DNS serial number
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 
 =head1 SYNOPSIS
@@ -96,8 +96,8 @@ Version 0.01
     use DNS::SerialNumber::Check;
 
     my $sn = DNS::SerialNumber::Check->new;
-    my $re = $sn->check("dnsbed.com");  # or,
-    my $re = $sn->check("dnsbed.com",['ns1.dnsbed.com','ns2.dnsbed.com']);
+    my $re = $sn->check("example.com");  # or,
+    my $re = $sn->check("example.com",['ns1.example.com','ns2.example.com']);
 
     print $re->status;
     use Data::Dumper;
@@ -116,10 +116,10 @@ Initialize the object.
 
 Check if the zone serial number in each nameserver for the given zonename is consistent.
 
-    my $re = $sn->check("dnsbed.com"); 
-    my $re = $sn->check("dnsbed.com",['ns1.dnsbed.com','ns2.dnsbed.com']);
+    my $re = $sn->check("example.com");  # or,
+    my $re = $sn->check("example.com",['ns1.example.com','ns2.example.com']);
 
-The first will check from the zone's default nameservers from the public NS records.
+The first will check from the zone's default nameservers (from its NS records).
 The second will check from the specified nameservers you provided.
 
 =head2 status()
@@ -143,12 +143,12 @@ Net::DNS
 
 =head1 AUTHOR
 
-Ken Peng <shorttag@gmail.com>
+Ken Peng <yhpeng@cpan.org>
 
 
 =head1 BUGS/LIMITATIONS
 
-If you have found bugs, please send email to <shorttag@gmail.com>
+If you have found bugs, please send email to <yhpeng@cpan.org>
 
 
 =head1 SUPPORT
